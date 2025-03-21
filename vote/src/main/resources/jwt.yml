@@ -1,0 +1,5 @@
+jwt:
+  secretAccessKey: 8c1eaeec4d903047c3f2e8772879982d62dadbbf0c9e713857f2e491fc155520
+  secretRefreshKey: d4fde132239557fb9cd72a94c2858619ef10a598220912619068c597886f457a
+  accessExpTime: 600000 #10분
+  refreshExpTime: 10800000 #3시간
