@@ -1,4 +1,145 @@
+/* 기본 스타일 */
+body {
+    margin: 0;
+    padding: 0;
+    background-color: #f8f9fa;
+}
+
 @import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css");
 html {
     font-family: Pretendard, -apple-system, BlinkMacSystemFont, system-ui, Roboto, "Helvetica Neue", "Segoe UI", "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", sans-serif;
+}
+
+/* 공통 컨포넌트 */
+
+.btn {
+    height: 48px;
+    width: 88px;
+    font-size: 18px;
+    padding: 10px;
+    cursor: pointer;
+    border-radius: 6px;
+    margin: 2px 0;
+}
+
+.btn_sm {
+    height: 40px;
+    width: 80px;
+    font-size: 15px;
+}
+
+.btn_lg {
+    height: 56px;
+    width: 96px;
+    font: 21px;
+}
+
+.btn_pr {
+    background-color: #5E75FB;
+    color: white;
+    border: none;
+}
+
+.btn_wh {
+    background-color:initial;
+    color: #5E75FB;
+    border: 1px solid #5E75FB;
+}
+.btn_gh {
+    background-color:initial;
+    color: #5E75FB;
+    border: none;
+}
+
+.inp {
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+    font-size: 15px;
+}
+
+.inp:focus-visible {
+    outline: 1px solid #007BFF;
+}
+
+/* 🔹 투표 상세 화면 */
+.vote-container {
+    display: flex;
+    height: 100vh;
+}
+
+/* 🔸 왼쪽 사이드바 */
+.sidebar {
+    flex: 1;
+    background: #007BFF;
+    color: white;
+    padding: 20px;
+    text-align: center;
+}
+
+.sidebar button {
+    background: white;
+    color: #007BFF;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+/* 🔸 중앙 투표 화면 */
+.vote-content {
+    flex: 3;
+    padding: 20px;
+    background: white;
+}
+
+.options button {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    background: #28A745;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+/* 🔸 댓글 */
+.comments input {
+    width: 80%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.comments button {
+    padding: 10px;
+    background: #007BFF;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+/* 🔸 오른쪽 접속자 목록 */
+.online-users {
+    flex: 1;
+    background: #343A40;
+    color: white;
+    padding: 20px;
+    text-align: center;
+}
+
+.online-users ul {
+    list-style: none;
+    padding: 0;
+}
+
+.online-users li {
+    padding: 10px;
+    background: #495057;
+    margin: 5px 0;
+    border-radius: 5px;
 }
