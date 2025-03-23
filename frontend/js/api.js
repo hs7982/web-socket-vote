@@ -1,4 +1,4 @@
-const API_BASE_URL = "localhost:8080/api/";
+const API_BASE_URL = "http://localhost:8080/api/";
 
 async function request(endpoint, options={}) {
     try {
@@ -12,18 +12,18 @@ async function request(endpoint, options={}) {
         });
 
         if (!response.ok) {
-            throw new Error(`API 요청 에러: ${response.status}: ${response.statusText}`)
+            throw new Error(`API 요청 에러: ${response.status}`)
         }
         return response.json();
     } catch(error) {
-        console.error(error.message);
+        console.error(error.message, error);
         throw error;
     }
 }
 
-export function api_login(email, passwd) {
+export function api_login(username, password) {
     return request("login", {
         method: "POST",
-        body: JSON.stringify({email, passwd}),
+        body: JSON.stringify({username, password}),
     });
 }
