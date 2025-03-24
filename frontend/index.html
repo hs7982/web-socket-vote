@@ -1,34 +1,26 @@
 <!DOCTYPE html>
 <html lang="ko">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>실시간 투표 서비스</title>
     <link rel="stylesheet" href="css/global.css">
     <link rel="stylesheet" href="css/index.css">
+    <link rel="stylesheet" href="css/sidebar.css">
+    <title>투표방 목록</title>
 </head>
-
 <body>
+    <div class="wrap">
+        <aside class="sidebar">
+            <h1>VOTE</h1>
+        </aside>
 
-    <section class="intro">
-        <div class="intro-left">
-            <h1>Welcome to Vote</h1>
-        </div>
-        <div class="intro-right">
-
-            <h2>로그인</h2>
-            <div class="input_wrap">
-                <input type="text" class="inp" placeholder="이메일">
-                <input type="password" class="inp" placeholder="비밀번호">
+        <main class="voteList">
+            <h2>투표 목록</h2>
+            <div class="listBox">
+                
             </div>
-            <button class="btn btn_pr">로그인</button>
-            <button class="btn btn_wh">회원가입</button>
-            
-            <div class="forget_pw">비밀번호를 잊으셨나요?</div>
-        </div>
-    </section>
-
+        </main>
+    </div>
+    <script type="module" src="js/index.js"></script>
 </body>
-
 </html>
