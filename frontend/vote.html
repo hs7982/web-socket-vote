@@ -1,16 +1,57 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
     <link rel="stylesheet" href="css/global.css">
+    <link rel="stylesheet" href="css/sidebar.css">
+    <link rel="stylesheet" href="css/vote.css">
 </head>
-<body>
-<div class="vote_wrap">
-    <div class="border_rd vote_inner">
-        <h2>투표 제목</h2>
 
+<body>
+    <div class="wrap">
+        <aside class="sidebar">
+            <h1>VOTE</h1>
+        </aside>
+        <main>
+            <div class="title">
+                <div class="backBtn" onclick="window.history.back()"></div>
+                <h2>투표 제목</h2>
+            </div>
+            <div class="voteWrap">
+                <div class="container">
+                    <div class="info">
+                        <h2>투표 제목</h2>
+                        <p>투표 내용</p>
+                    </div>
+                    <div class="line"></div>
+                    <div class="voteOption">
+
+                        <div class="optionRow">
+                            <input type="radio" name="vote" id="1">
+                            <label for="1">옵션1</label>
+                        </div>
+
+                        <div class="optionRow">
+                            <input type="radio" name="vote" id="2">
+                            <label for="2">옵션2</label>
+                        </div>
+
+                        <div class="optionRow">
+                            <input type="radio" name="vote" id="3">
+                            <label for="3">옵션3</label>
+                        </div>
+
+                    </div>
+                    <div class="btnBox">
+                        <button class="btn btn_pr btn_lg">투표하기</button>
+                    </div>
+                </div>
+            </div>
+
+        </main>
     </div>
-</div>
 </body>
+
 </html>

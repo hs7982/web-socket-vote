@@ -1,0 +1,75 @@
+.wrap {
+    display: flex;
+}
+
+main {
+    flex: 1;
+}
+
+.title {
+    display: flex;
+    align-items: center;
+}
+
+.backBtn {
+    background: url(../img/back.svg) no-repeat center;
+    width: 35px;
+    height: 35px;
+    margin-right: 10px;
+    cursor: pointer;
+}
+
+main {
+    padding: 10px 20px;
+}
+
+.voteWrap {
+    width: 100%;
+}
+
+.container {
+    max-width: 850px;
+    margin: 10px auto;
+    border: 1px solid gray;
+    border-radius: 15px;
+    box-sizing: border-box;
+    padding: 15px;
+}
+
+.info {
+    width: 100%;
+    padding: 0 25px;
+}
+
+.info>h2 {
+    text-align: center;
+}
+
+.line {
+    border-bottom: 1px solid gray;
+    margin: 20px 0;
+}
+
+.btnBox {
+    text-align: center;
+}
+
+.container>.btn {
+    margin: 0 auto;
+}
+
+.optionRow {
+    display: flex;
+    margin: 20px 0;
+    padding: 0 25px;
+    font-size: 25px;
+    align-items: center;
+}
+
+.optionRow>input[type='radio'] {
+    margin-right: 10px;
+}
+
+.optionRow>label {
+    width: 100%;
+}
