@@ -1,13 +1,21 @@
 .wrap {
     display: flex;
+    min-height: 100vh;
 }
 
 main {
     flex: 1;
+    display: flex;
+    position: relative;
+    flex-direction: column;
+    padding: 100px 20px;
 }
 
 .title {
     display: flex;
+    position: absolute;
+    top: 0;
+    left: 20px;
     align-items: center;
 }
 
@@ -19,57 +27,98 @@ main {
     cursor: pointer;
 }
 
-main {
-    padding: 10px 20px;
-}
-
 .voteWrap {
-    width: 100%;
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .container {
-    max-width: 850px;
-    margin: 10px auto;
-    border: 1px solid gray;
+    width: 80%;
+    max-width: 1100px;
     border-radius: 15px;
     box-sizing: border-box;
-    padding: 15px;
+    padding: 25px;
+    min-width: 350px;
+    box-shadow: 0 0 25px #e0e0e0;
 }
 
 .info {
     width: 100%;
     padding: 0 25px;
-}
-
-.info>h2 {
     text-align: center;
 }
 
-.line {
-    border-bottom: 1px solid gray;
-    margin: 20px 0;
+.info > p {
+    font-size: 17px;
 }
 
 .btnBox {
     text-align: center;
 }
 
-.container>.btn {
+.container > .btn {
     margin: 0 auto;
+}
+
+.voteOption {
+    margin: 30px 0;
+    /* display: none; */
+}
+.resultOption {
+    margin: 30px 0;
 }
 
 .optionRow {
     display: flex;
-    margin: 20px 0;
-    padding: 0 25px;
-    font-size: 25px;
+    margin: 25px 0;
+    padding: 0 20px;
+    height: 50px;
+    font-size: 20px;
     align-items: center;
+    border: 2px solid #e2e8f0;
+    border-radius: 10px;
+    transition: all 0.3s ease;
 }
 
-.optionRow>input[type='radio'] {
+.voteOption > .optionRow {
+    cursor: pointer;
+}
+
+
+.optionRow:hover {
+    border-color: #5E75FB;
+    transform: translateY(-5px);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+.optionRow > input[type='radio'] {
     margin-right: 10px;
 }
 
-.optionRow>label {
+.optionTitle {
     width: 100%;
+    height: 100%;
+    line-height: 50px;
+    overflow: hidden;
+    cursor:inherit;
 }
+
+@keyframes fillChart {
+    from { 
+        background-image: linear-gradient(90deg, #007BFF 0%, white 0%); 
+    }
+    to { 
+        background-image: linear-gradient(90deg, #007BFF var(--percentage), white var(--percentage)); 
+    }
+}
+
+.resultOption > .optionRow {
+    background-image: linear-gradient(90deg, #007BFF var(--percentage), white var(--percentage));
+    animation: fillChart 1s ease;
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
+}
+
