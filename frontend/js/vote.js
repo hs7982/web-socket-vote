@@ -105,8 +105,16 @@ function createVoteOption(voteData) {
             divOptionTitle.className = "optionTitle";
             divOptionTitle.innerText = voteData.option[key].name;
 
+            const divChart = document.createElement("div");
+            divChart.className="chart";
+            divChart.id = "chart"+key;
+
+            divOptionRow.appendChild(divChart);
             divOptionRow.appendChild(divOptionTitle);
             divVoteOption.appendChild(divOptionRow);
+
+
+
         }
 
     });
@@ -128,12 +136,10 @@ function createVoteOption(voteData) {
     divVoteOption.appendChild(divBtnBox);
 }
 
-function updateResult(percentage) {
-    console.log("percentage: " ,percentage)
-    const tmp = document.getElementsByClassName("optionRow")[0];
-    tmp.style.setProperty('--percentage', `${percentage}%`);
-    tmp.style.setProperty('--r-percentage', `${100-percentage}%`);
-    // tmp.style.backgroundImage = `linear-gradient(90deg, #007BFF ${percentage}%, white ${100-percentage}%)`
+function updateResult(optionId, percentage) {
+    const optionChart = document.getElementById("chart"+optionId);
+    optionChart.style.setProperty('--percentage', `${percentage}%`);
+    console.log(optionChart);
 }
 
 // 초기 페이지 초기화 영역
@@ -147,7 +153,7 @@ function initPage() {
     const voteData = loadData(id);
     createVoteInfoContainer(voteData);
     createVoteOption(voteData);
-    updateResult(40)
+    updateResult(1, 40)
 }
 
 //dom로드 완료시 페이지 초기화 실행
