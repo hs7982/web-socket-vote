@@ -1,12 +1,14 @@
-package com.hseok.vote.user;
+package com.hseok.vote.user.dto;
 
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 
-@Data
 @AllArgsConstructor
-public class UserJoinResponse {
-    private long userId;
+@Data
+@Builder
+public class UserJoinRequest {
     private String username;
+    private String password;
     private String email;
 }

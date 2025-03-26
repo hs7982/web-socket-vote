@@ -1,5 +1,7 @@
 package com.hseok.vote.user;
 
+import com.hseok.vote.user.dto.UserJoinRequest;
+import com.hseok.vote.user.dto.UserJoinResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

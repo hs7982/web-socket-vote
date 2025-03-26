@@ -1,6 +1,8 @@
 package com.hseok.vote.user;
 
 import com.hseok.vote.user.domain.User;
+import com.hseok.vote.user.dto.UserJoinRequest;
+import com.hseok.vote.user.dto.UserJoinResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
