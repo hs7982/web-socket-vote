@@ -8,6 +8,7 @@ body {
 }
 
 @import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css");
+
 html {
     font-family: Pretendard, -apple-system, BlinkMacSystemFont, system-ui, Roboto, "Helvetica Neue", "Segoe UI", "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", sans-serif;
 }
@@ -47,12 +48,13 @@ html {
 }
 
 .btn_wh {
-    background-color:initial;
+    background-color: initial;
     color: #5E75FB;
     border: 1px solid #5E75FB;
 }
+
 .btn_gh {
-    background-color:initial;
+    background-color: initial;
     color: #5E75FB;
     border: none;
 }
@@ -83,6 +85,11 @@ input[type='radio'] {
 
 input[type='radio']:checked {
     background-color: #5E75FB;
-    border: 3px solid white; 
+    border: 3px solid white;
     box-shadow: 0 0 0 1.6px #5E75FB;
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
 }

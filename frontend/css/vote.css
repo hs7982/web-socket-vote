@@ -98,27 +98,42 @@ main {
 }
 
 .optionTitle {
-    width: 100%;
     height: 100%;
     line-height: 50px;
     overflow: hidden;
     cursor:inherit;
     z-index: 1;
 }
+
+.voteOption .optionTitle {
+    width: 100%;
+}
+
+.optionVoteNum {
+    height: 100%;
+    line-height: 50px;
+    margin-left: 12px;
+    font-size: 15px;
+    color: rgb(67, 67, 67);
+    overflow: hidden;
+    cursor:inherit;
+    z-index: 1;
+}
+
 .chart {
     --percentage: 0%;
     position: absolute;
-    width: var(--percentage);
+    width: 0%;
     height: 100%;
     top: 0;
     left: 0;
-    background-color: #007BFF;
-    animation: fillChart 1s ease;
+    background-color: #7e90fd;
+    /* animation: fillChart 0.3s ease; */
 }
 
 @keyframes fillChart {
     from { 
-        width: 0%;
+        width: var(--prev-percentage);
     }
     to { 
         width: var(--percentage);
