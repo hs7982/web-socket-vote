@@ -1,6 +1,7 @@
 package com.hseok.vote.user;
 
 import com.hseok.vote.user.domain.User;
+import com.hseok.vote.user.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;

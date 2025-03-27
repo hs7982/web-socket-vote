@@ -6,9 +6,11 @@ import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
 import lombok.Getter;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.ResponseCookie;
 import org.springframework.stereotype.Component;
 
 import javax.crypto.SecretKey;
+import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
@@ -67,6 +69,29 @@ public class JwtGenerator {
         claims.put("Identifier", user.getId());
         claims.put("Role", user.getRoles());
         return claims;
+    }
+
+    public ResponseCookie createTokenCookie(String prefix, String token) {
+        long maxAgeSec;
+        if ("access_token".equals(prefix)) {
+            maxAgeSec = accessTokenExpTime / 1000;
+        } else if ("refresh_token".equals(prefix)) {
+            maxAgeSec = RefreshTokenExpTime / 1000;
+        } else {
+            throw new IllegalArgumentException("잘못된 prefix: " + prefix);
+        }
+
+        return ResponseCookie.from(prefix, token)
+                .path("/")
+                .maxAge(maxAgeSec)
+                .httpOnly(true)
+                .sameSite("Lax")
+                .secure(false)
+                .build();
+    }
+
+    public LocalDateTime getRefreshTokenExpTime() {
+        return LocalDateTime.now().plusSeconds(RefreshTokenExpTime / 1000);
     }
 
 }

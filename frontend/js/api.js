@@ -5,18 +5,25 @@ async function request(endpoint, options={}) {
         const response = await fetch(`${API_BASE_URL}${endpoint}`, {
             headers: {
                 "Content-Type": "application/json",
-                Authorization: `Bearer `,
                 ...options.headers,
             },
+            credentials: "include",
             ...options
         });
 
+
+
         if (!response.ok) {
-            throw new Error(`API 요청 에러: ${response.status}`)
+            const data = await response.json();
+            throw {
+                status: response.status,
+                message: data.message || '알 수 없는 오류가 발생했습니다.',
+                data: data
+            };
         }
-        return response.json();
+        return response;
     } catch(error) {
-        console.error(error.message, error);
+        console.error('API 요청 중 오류:', error);
         throw error;
     }
 }
@@ -26,4 +33,10 @@ export function api_login(username, password) {
         method: "POST",
         body: JSON.stringify({username, password}),
     });
+}
+
+export function api_test() {
+    return request(""), {
+        method: "GET",
+    }
 }

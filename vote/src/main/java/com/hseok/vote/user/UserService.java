@@ -3,6 +3,7 @@ package com.hseok.vote.user;
 import com.hseok.vote.user.domain.User;
 import com.hseok.vote.user.dto.UserJoinRequest;
 import com.hseok.vote.user.dto.UserJoinResponse;
+import com.hseok.vote.user.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -16,6 +17,10 @@ public class UserService {
 
     public User getUserById(Long id) {
         return userRepository.findById(id).orElseThrow(()->new UsernameNotFoundException("User not found"));
+    }
+
+    public User getUserByUsername(String username) {
+        return userRepository.findByUsername(username).orElseThrow(()->new UsernameNotFoundException("User not found"));
     }
 
     public UserJoinResponse userJoin(UserJoinRequest reqDto) {

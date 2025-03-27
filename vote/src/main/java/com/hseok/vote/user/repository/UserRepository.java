@@ -1,4 +1,4 @@
-package com.hseok.vote.user;
+package com.hseok.vote.user.repository;
 
 import com.hseok.vote.user.domain.User;
 import org.springframework.data.jpa.repository.JpaRepository;

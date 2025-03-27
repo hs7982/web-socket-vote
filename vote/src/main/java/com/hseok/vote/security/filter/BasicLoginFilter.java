@@ -53,20 +53,14 @@ public class BasicLoginFilter extends UsernamePasswordAuthenticationFilter {
     @Override
     protected void successfulAuthentication(HttpServletRequest request, HttpServletResponse response, FilterChain chain, Authentication authResult) throws IOException, ServletException {
         log.info(">> ID/PW 로그인 성공! UserID: {}, REQ IP: {}", authResult.getName(), request.getRemoteAddr());
-        UserDetails userDetails = (UserDetails)authResult.getPrincipal();
         //jwt 토큰 발행
         String accessToken = jwtService.createAccessToken(response, (UserPrincipal) authResult.getPrincipal());
         String refreshToken = jwtService.createRefreshToken(response, (UserPrincipal) authResult.getPrincipal());
 
-        // TODO: RTR 방식을 위한 리프레시 토큰 저장
-
-
-        //발행 후 사용자에게 토큰 반환
         response.setContentType(MediaType.APPLICATION_JSON_VALUE);
-        response.addHeader("Authorization", "Bearer " + accessToken);
-        response.addHeader("Refresh-Token", refreshToken);
-
+        response.setCharacterEncoding("UTF-8");
         Map<String, String> tokenResponse = new HashMap<>();
+        tokenResponse.put("message", "로그인 성공");
         tokenResponse.put("access_token", accessToken);
         tokenResponse.put("refresh_token", refreshToken);
 
