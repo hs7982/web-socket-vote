@@ -2,7 +2,7 @@
 const tmpData = {
     title: "투표 제목",
     content: "투표 내용",
-    isVoted: true,
+    isVoted: false,
     option: {
         1: { name: "옵션1", vote: 8, percentage: 20 },
         2: { name: "옵션2", vote: 9, percentage: 40 },
@@ -106,7 +106,11 @@ function createVoteOption(voteData) {
             divOptionTitle.className = "optionTitle";
             divOptionTitle.innerText = voteData.option[key].name;
 
-            let divChart = document.createElement("div");
+            const divOptionVoteNum = document.createElement("div")
+            divOptionVoteNum.className = "optionVoteNum";
+            divOptionVoteNum.innerText = voteData.option[key].vote+"표";
+
+            const divChart = document.createElement("div");
             divChart.className = "chart";
             divChart.id = "chart" + key;
 
@@ -114,6 +118,7 @@ function createVoteOption(voteData) {
 
             divOptionRow.appendChild(divChart);
             divOptionRow.appendChild(divOptionTitle);
+            divOptionRow.appendChild(divOptionVoteNum);
             divVoteOption.appendChild(divOptionRow);
         }
 
@@ -141,18 +146,22 @@ function updateResult(divChart, optionData) {
         divChart = document.getElementById("chart" + divChart);
 
     let percentage = 0;
-    if (typeof (optionData) == "number")
+    if (typeof (optionData) == "number") 
+        //optionData 객체 전체가 들어온게 아니라 퍼센트 숫자만 들어왔을때
         percentage = optionData;
     else
         percentage = optionData.percentage;
 
-    const prevPercentage = divChart.style.width;
+    //업데이트 하기 전 현재 퍼센트
+    const prevPercentage = divChart.style.width || 0;
 
+    // 리플로우 강제 실행 (브라우저가 다시 계산하도록 유도)
     divChart.style.animation = "none";
-    divChart.offsetHeight; // 리플로우 강제 실행 (브라우저가 다시 계산하도록 유도)
-    divChart.style.animation = "fillChart 1s ease";
+    divChart.offsetHeight; 
+    divChart.style.animation = "fillChart 0.5s ease";
 
-    divChart.style.setProperty('--prev-percentage', `${prevPercentage}%`);
+    //퍼센트 업데이트
+    divChart.style.setProperty('--prev-percentage', `${prevPercentage}`);
     divChart.style.setProperty('--percentage', `${percentage}%`);
     divChart.style.width = `${percentage}%`;
 
@@ -170,9 +179,6 @@ function initPage() {
     const voteData = loadData(id);
     createVoteInfoContainer(voteData);
     createVoteOption(voteData);
-    setInterval(() => {
-        updateResult(1, 100)
-    }, 3000)
 }
 
 //dom로드 완료시 페이지 초기화 실행

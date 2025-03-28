@@ -1,4 +1,4 @@
-const API_BASE_URL = "http://localhost:8080/api/";
+const API_BASE_URL = "http://localhost:8080/api";
 
 async function request(endpoint, options={}) {
     try {
@@ -15,6 +15,9 @@ async function request(endpoint, options={}) {
 
         if (!response.ok) {
             const data = await response.json();
+            if(window.location.pathname !== "/login" && response.status === 403) {
+                window.location.href = "./login"
+            }
             throw {
                 status: response.status,
                 message: data.message || '알 수 없는 오류가 발생했습니다.',
@@ -29,14 +32,12 @@ async function request(endpoint, options={}) {
 }
 
 export function api_login(username, password) {
-    return request("login", {
+    return request("/login", {
         method: "POST",
         body: JSON.stringify({username, password}),
     });
 }
 
 export function api_test() {
-    return request(""), {
-        method: "GET",
-    }
+    return request("", { method: "GET" });
 }
