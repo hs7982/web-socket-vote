@@ -22,6 +22,11 @@ public class MainController {
         return "vote";
     }
 
+    @GetMapping("/join")
+    public String join() {
+        return "join";
+    }
+
     @GetMapping("/api")
     public ResponseEntity<String> api() {
         return ResponseEntity.ok("API Server");

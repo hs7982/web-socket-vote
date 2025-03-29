@@ -42,13 +42,24 @@ public class SecurityConfig {
                 .authorizeHttpRequests(authorize -> authorize
                         .requestMatchers("/api/user/join").permitAll()
                         .requestMatchers("/api/login").permitAll()
-                        .requestMatchers("/api/user/logout").permitAll()
+                        .requestMatchers("/api/logout").permitAll()
                         .requestMatchers("/api/**").authenticated()
                         .anyRequest().permitAll()
                 )
                 // JWT 인증 방식을 사용하므로, 세션 미사용
                 .sessionManagement(session -> session
                         .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+                )
+                .logout(logout -> logout
+                        .logoutUrl("/api/logout")
+                                .addLogoutHandler((request, response, authentication) -> {
+                                    jwtService.logout(request);
+                                })
+                        .logoutSuccessUrl("/login")
+                        .logoutSuccessHandler((request, response, authentication) -> {
+                            response.sendRedirect("/login?logout=self");
+                        })
+                        .deleteCookies("remember-me", "access_token", "refresh_token")
                 )
                 //UsernamePasswordAuthenticationFilter을 대체하여 새로 만든 필터를 추가
                 .addFilterAt(basicLoginFilter, UsernamePasswordAuthenticationFilter.class)

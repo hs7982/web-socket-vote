@@ -73,14 +73,17 @@ public class JwtService {
         return getTokenStatus(token, ACCESS_PREFIX) == TokenStatus.AUTHENTICATED;
     }
 
-    public boolean validateRefreshToken(String token, User user) {
-        if (getTokenStatus(token, REFRESH_PREFIX) != TokenStatus.AUTHENTICATED)
-            return false;
+    public boolean validateRefreshToken(String token) {
+        return getTokenStatus(token, REFRESH_PREFIX) == TokenStatus.AUTHENTICATED;
+    }
 
+    public boolean validateRefreshTokenWithUser(String token, User user) {
         RefreshToken storedToken = refreshTokenRepository.findTopByUserOrderByIdDesc(user).orElseThrow();
         return storedToken.getToken().equals(token);
 
     }
+
+
 
     private TokenStatus getTokenStatus(String token, JwtRule jwtRule) {
         try {
@@ -101,19 +104,30 @@ public class JwtService {
     }
 
     public String getUsernameFromAccessToken(String token) {
-        return Jwts.parser().verifyWith(jwtGenerator.getAccessKey()).build()
-                .parseSignedClaims(token).getPayload().getSubject();
+        try {
+            return Jwts.parser().verifyWith(jwtGenerator.getAccessKey()).build()
+                    .parseSignedClaims(token).getPayload().getSubject();
+        } catch (Exception e) {
+            throw new IllegalArgumentException("잘못된 토큰입니다.");
+        }
+
     }
 
     public String getUsernameFromRefreshToken(String token) {
-        return Jwts.parser().verifyWith(jwtGenerator.getRefreshKey()).build()
-                .parseSignedClaims(token).getPayload().getSubject();
+        try {
+            return Jwts.parser().verifyWith(jwtGenerator.getRefreshKey()).build()
+                    .parseSignedClaims(token).getPayload().getSubject();
+        } catch (Exception e) {
+            throw new IllegalArgumentException("잘못된 토큰입니다.");
+        }
+
     }
 
     public User getUserFromRefreshToken(String token) {
         return userService.getUserByUsername(getUsernameFromRefreshToken(token));
     }
 
+    /// TODO: 매 요청시마다 db요청 부하 발생. jwt토큰에 포함된 정보만으로 principal을 생성하는 방식 검토
     public Authentication getAuthentication(String token) {
         UserDetails principal = customUserDetailsService.loadUserByUsername(getUsernameFromAccessToken(token));
         return new UsernamePasswordAuthenticationToken(principal, null, principal.getAuthorities());
@@ -128,6 +142,23 @@ public class JwtService {
                 .map(Cookie::getValue)
                 .orElse(null);
     }
+
+    @Transactional
+    public void logout(User user) {
+        refreshTokenRepository.deleteByUser(user);
+        log.info("[JWT Service] RefreshToken 무효화 처리됨: " + user.getUsername());
+    }
+
+    @Transactional
+    public void logout(HttpServletRequest request) {
+        String refreshToken = resolveTokenFromCookie(request, JwtRule.REFRESH_PREFIX);
+        User user = getUserFromRefreshToken(refreshToken);
+        log.info(user.getUsername());
+
+        logout(user);
+    }
+
+
 
 
 }

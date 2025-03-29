@@ -13,7 +13,6 @@ import java.util.List;
 @RequiredArgsConstructor
 @Getter
 public class UserPrincipal implements UserDetails, CredentialsContainer {
-    @Getter
     private final Long userId;
     private final String username;
     private String password;
