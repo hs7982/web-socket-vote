@@ -8,6 +8,8 @@ import java.time.LocalDateTime;
 
 @Getter
 @NoArgsConstructor
+@AllArgsConstructor
+@Builder
 @Entity
 @Table(name = "vote_record", uniqueConstraints = {
         @UniqueConstraint(columnNames = {"user_id", "vote_room_id"})})

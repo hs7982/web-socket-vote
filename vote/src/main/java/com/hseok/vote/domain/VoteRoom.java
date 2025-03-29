@@ -41,4 +41,8 @@ public class VoteRoom {
 
     @OneToMany(mappedBy = "voteRoom", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<VoteOption> options;
+
+    public void increaseVote() {
+        this.voteCount++;
+    }
 }

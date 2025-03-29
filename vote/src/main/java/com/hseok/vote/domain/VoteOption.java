@@ -1,5 +1,6 @@
 package com.hseok.vote.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -15,11 +16,15 @@ public class VoteOption {
     private Long id;
 
     @ManyToOne(fetch = FetchType.LAZY)
+    @JsonIgnore
     @JoinColumn(name = "vote_room_id")
     private VoteRoom voteRoom;
 
     @Column(nullable = false)
     private String name;
+
+    @Column
+    private int OptionOrder;
 
     @Column
     private int voteCount=0;
