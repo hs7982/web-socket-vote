@@ -16,7 +16,7 @@ async function request(endpoint, options={}) {
         if (!response.ok) {
             const data = await response.json();
             if(window.location.pathname !== "/login" && response.status === 403) {
-                window.location.href = "./login"
+                window.location.href = "./login?logout=expire"
             }
             throw {
                 status: response.status,
@@ -35,6 +35,42 @@ export function api_login(username, password) {
     return request("/login", {
         method: "POST",
         body: JSON.stringify({username, password}),
+    });
+}
+
+export function api_signup(userData) {
+    return request("/user/join", {
+        method: "POST",
+        body: JSON.stringify(userData),
+    });
+}
+
+export function api_getVoteList() {
+    return request("/vote", { method: "GET" });
+}
+
+export function api_getVoteDetail(id) {
+    return request("/vote/"+id, { method: "GET" });
+}
+
+export function api_castVote(roomId, optionId) {
+    return request("/vote/"+roomId+"/cast", {
+        method: "POST",
+        body: JSON.stringify({optionId}),
+    });
+}
+
+export function api_updateVote(roomId, optionId) {
+    return request("/vote/"+roomId+"/cast", {
+        method: "PUT",
+        body: JSON.stringify({optionId}),
+    });
+}
+
+export function api_createVoteRoom(voteRoomData) {
+    return request("/vote", {
+        method: "POST",
+        body: JSON.stringify(voteRoomData),
     });
 }
 
