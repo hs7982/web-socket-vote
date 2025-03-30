@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>회원가입</title>
+    <link rel="stylesheet" href="/css/global.css">
+    <link rel="stylesheet" href="/css/join.css">
+</head>
+<body>
+<div class="container">
+    <div class="signup-card">
+        <h2>회원가입</h2>
+
+        <form id="signupForm" onsubmit="return false;">
+            <div class="form-group">
+                <label for="username">사용자 이름</label>
+                <input type="text" id="username" name="username" class="inp" placeholder="사용자 이름 (3-50자)" required>
+                <div class="error-message" id="username-error"></div>
+            </div>
+
+            <div class="form-group">
+                <label for="email">이메일</label>
+                <input type="email" id="email" name="email" class="inp" placeholder="example@email.com" required>
+                <div class="error-message" id="email-error"></div>
+            </div>
+
+            <div class="form-group">
+                <label for="password">비밀번호</label>
+                <input type="password" id="password" name="password" class="inp" placeholder="비밀번호 (8자 이상)" required>
+                <div class="error-message" id="password-error"></div>
+            </div>
+
+            <div class="form-group">
+                <label for="confirmPassword">비밀번호 확인</label>
+                <input type="password" id="confirmPassword" name="confirmPassword" class="inp" placeholder="비밀번호 확인" required>
+                <div class="error-message" id="confirm-password-error"></div>
+            </div>
+
+            <div class="form-buttons">
+                <button type="submit" id="btn_submit" class="btn btn_pr btn_lg" style="width: 100%;">회원가입</button>
+            </div>
+        </form>
+
+        <div class="login-link">
+            <p>이미 계정이 있으신가요? <a href="/login" class="login-text">로그인</a></p>
+        </div>
+    </div>
+</div>
+
+<div class="modal" id="successModal">
+    <div class="modal-content">
+        <h3>회원가입 성공!</h3>
+        <p>회원가입이 성공적으로 완료되었습니다.</p>
+        <button id="closeModal" class="btn btn_pr">확인</button>
+    </div>
+</div>
+
+<script type="module" src="/js/join.js"></script>
+</body>
+</html>

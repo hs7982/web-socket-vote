@@ -22,5 +22,19 @@ const btn_login = () => {
     
         // window.location.href = "./index.html"
 }
-api_test();
+
+function getParam() {
+    const urlParams = new URLSearchParams(window.location.search);
+    return urlParams.get('logout');
+}
 document.getElementById("btn_login").addEventListener("click", btn_login);
+document.getElementById("btn_join").addEventListener("click", ()=>window.location.href="/join");
+
+const logoutResult = getParam();
+const divAlert = document.getElementsByClassName("alert")[0]
+if (logoutResult) {
+    if (logoutResult === "self")
+        divAlert.innerHTML = `<div class="info">로그아웃 되었습니다.</div>`;
+    else if(logoutResult==="expire")
+        divAlert.innerHTML = `<div class="error">로그인 정보가 없거나 만료되었습니다.</div>`;
+}

@@ -27,6 +27,9 @@ public class MainController {
         return "join";
     }
 
+    @GetMapping("/createRoom")
+    public String createRoom() {return "createRoom";}
+
     @GetMapping("/api")
     public ResponseEntity<String> api() {
         return ResponseEntity.ok("API Server");

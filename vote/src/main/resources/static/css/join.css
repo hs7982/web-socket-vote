@@ -1,0 +1,173 @@
+/* 회원가입 페이지 스타일 */
+body {
+    padding-left: 0;
+    min-height: 0;
+}
+.container {
+    max-width: 500px;
+    margin: 60px auto;
+    padding: 0 20px;
+}
+
+.signup-card {
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    padding: 40px;
+}
+
+h2 {
+    font-size: 24px;
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 8px;
+    text-align: center;
+}
+
+.description {
+    text-align: center;
+    color: #666;
+    margin-bottom: 30px;
+    font-size: 15px;
+}
+
+.form-group {
+    margin-bottom: 10px;
+}
+
+label {
+    display: block;
+    margin-bottom: 8px;
+    font-size: 15px;
+    font-weight: 500;
+    color: #333;
+}
+
+.inp {
+    width: 100%;
+    height: 48px;
+}
+
+.error-message {
+    color: #e53935;
+    font-size: 13px;
+    margin-top: 5px;
+    min-height: 18px;
+}
+
+.agreement {
+    margin-bottom: 20px;
+}
+
+.checkbox-wrapper {
+    display: flex;
+    align-items: flex-start;
+}
+
+.checkbox-wrapper input[type="checkbox"] {
+    margin-right: 10px;
+    margin-top: 3px;
+}
+
+.checkbox-wrapper label {
+    font-size: 14px;
+    font-weight: 400;
+    color: #555;
+    margin-bottom: 0;
+}
+
+.form-buttons {
+    margin-bottom: 20px;
+}
+
+.login-link {
+    text-align: center;
+    margin-top: 20px;
+    font-size: 14px;
+    color: #666;
+}
+
+.login-text {
+    color: #5E75FB;
+    font-weight: 500;
+}
+
+.login-text:hover {
+    text-decoration: underline;
+}
+
+/* 모달 스타일 */
+.modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 1000;
+    justify-content: center;
+    align-items: center;
+    padding-left: 0;  /* 글로벌 CSS와 충돌 방지 */
+}
+
+.modal-content {
+    background-color: white;
+    padding: 30px;
+    border-radius: 10px;
+    text-align: center;
+    max-width: 400px;
+    width: 90%;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+}
+
+.modal-content h3 {
+    margin-bottom: 15px;
+    color: #333;
+    font-size: 20px;
+}
+
+.modal-content p {
+    margin-bottom: 25px;
+    color: #666;
+}
+
+/* 커스텀 체크박스 스타일 */
+input[type="checkbox"] {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    width: 18px;
+    height: 18px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    outline: none;
+    cursor: pointer;
+    position: relative;
+}
+
+input[type="checkbox"]:checked {
+    background-color: #5E75FB;
+    border-color: #5E75FB;
+}
+
+input[type="checkbox"]:checked::after {
+    content: "✓";
+    color: white;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 12px;
+}
+
+/* 반응형 */
+@media (max-width: 576px) {
+    .signup-card {
+        padding: 30px 20px;
+    }
+
+    .container {
+        margin-top: 30px;
+    }
+}
