@@ -2,6 +2,7 @@
 /* 사이드바 */
 .sidebar {
     display: flex;
+    justify-content: space-between;
     flex-direction: column;
     position: fixed;
     top: 0;
@@ -16,4 +17,10 @@
     color: white;
     font-size: 23px;
     text-align: center;
+}
+.logout {
+    color: white;
+    font-size: 14px;
+    text-align: center;
+    margin: 10px 0;
 }
