@@ -92,13 +92,13 @@ public class JwtService {
             Jwts.parser()
                     .verifyWith(key).build()
                     .parseSignedClaims(token);
-            log.info("토큰검증:성공");
+            log.debug("토큰검증:성공");
             return TokenStatus.AUTHENTICATED;
         } catch (ExpiredJwtException e) {
-            log.info("토큰검증:만료");
+            log.debug("토큰검증:만료");
             return TokenStatus.EXPIRED;
         } catch (JwtException e) {
-            log.info("토큰검증:에러");
+            log.debug("토큰검증:에러");
             return TokenStatus.INVALID;
         }
     }
