@@ -11,11 +11,13 @@
 <body>
     <div class="wrap">
         <aside class="sidebar">
-            <a href="./index"><h1>VOTE</h1></a>
+            <a href="/"><h1>VOTE</h1></a>
+            <a href="/api/logout" class="logout">로그아웃</a>
         </aside>
 
         <main class="voteList">
-            <h2>투표 목록</h2>
+            <div class="title"><h2>투표 목록</h2><a href="/createRoom" class="btn btn_pr btn_sm">만들기</a></div>
+
             <div class="listBox"></div>
         </main>
     </div>
