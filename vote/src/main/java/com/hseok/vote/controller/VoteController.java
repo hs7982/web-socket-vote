@@ -1,18 +1,16 @@
 package com.hseok.vote.controller;
 
 import com.hseok.vote.domain.VoteRoom;
-import com.hseok.vote.dto.VoteCastRequestDto;
-import com.hseok.vote.dto.VoteRoomCreateRequestDto;
-import com.hseok.vote.dto.VoteRoomResponseDto;
+import com.hseok.vote.dto.vote.VoteCastRequestDto;
+import com.hseok.vote.dto.vote.VoteRoomCreateRequestDto;
+import com.hseok.vote.dto.vote.VoteRoomResponseDto;
 import com.hseok.vote.service.VoteService;
 import com.hseok.vote.user.UserPrincipal;
-import com.hseok.vote.util.ResponseBody;
 import com.hseok.vote.util.ResponseHandler;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -55,6 +53,18 @@ public class VoteController {
         );
     }
 
+    @PutMapping("/{roomId}/cast")
+    public ResponseEntity<Object> updateVote(@PathVariable Long roomId,
+                                           @RequestBody VoteCastRequestDto requestDto,
+                                           @AuthenticationPrincipal UserPrincipal principal) {
+        voteService.updateVote(roomId, requestDto, principal.getUserId());
+        return ResponseHandler.responseBuilder(
+                HttpStatus.CREATED,
+                "투표가 수정되었습니다!",
+                null
+        );
+    }
+
     //post: 투표방 생성
     @PostMapping
     public ResponseEntity<Object> createVoteRoom(@RequestBody VoteRoomCreateRequestDto requestDto, @AuthenticationPrincipal UserPrincipal principal) {
@@ -63,6 +73,16 @@ public class VoteController {
                 HttpStatus.CREATED,
                 "투표방이 생성되었습니다.",
                 roomId
+        );
+    }
+
+    @DeleteMapping("/{roomId}")
+    public ResponseEntity<Object> deleteVoteRoom(@PathVariable Long roomId, @AuthenticationPrincipal UserPrincipal principal) {
+        voteService.deleteVoteRoom(roomId, principal.getUserId());
+        return ResponseHandler.responseBuilder(
+                HttpStatus.OK,
+                "투표방이 삭제되었습니다.",
+                null
         );
     }
 }

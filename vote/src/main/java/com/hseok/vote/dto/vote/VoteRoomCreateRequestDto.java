@@ -1,4 +1,4 @@
-package com.hseok.vote.dto;
+package com.hseok.vote.dto.vote;
 
 import com.hseok.vote.domain.VoteRoom;
 import jakarta.validation.constraints.NotEmpty;

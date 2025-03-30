@@ -32,4 +32,5 @@ public class VoteOption {
     public void increaseVote() {
         this.voteCount++;
     }
+    public void decreaseVote() { this.voteCount--;}
 }

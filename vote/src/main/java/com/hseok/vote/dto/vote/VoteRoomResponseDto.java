@@ -1,4 +1,4 @@
-package com.hseok.vote.dto;
+package com.hseok.vote.dto.vote;
 
 import com.hseok.vote.domain.VoteRecord;
 import com.hseok.vote.domain.VoteRoom;
@@ -24,7 +24,12 @@ public class VoteRoomResponseDto {
     private List<VoteOptionDto> options;
     private VoteStatusDto userVoteStatus; // 사용자의 투표 상태
 
-    public static VoteRoomResponseDto from(VoteRoom voteRoom, VoteRecord userVoteRecord) {
+    public static VoteRoomResponseDto from(VoteRoom voteRoom, VoteRecord userVoteRecord, List<VoteRecord> allVoters) {
+
+        List<VoteOptionDto> options = voteRoom.getOptions().stream()
+                .map(option -> VoteOptionDto.from(option, allVoters))
+                .collect(Collectors.toList());
+
         return VoteRoomResponseDto.builder()
                 .id(voteRoom.getId())
                 .title(voteRoom.getTitle())
@@ -33,9 +38,7 @@ public class VoteRoomResponseDto {
                 .createTime(voteRoom.getCreateTime())
                 .updateTime(voteRoom.getUpdateTime())
                 .endTime(voteRoom.getEndTime())
-                .options(voteRoom.getOptions().stream()
-                        .map(VoteOptionDto::from)
-                        .collect(Collectors.toList()))
+                .options(options)
                 .userVoteStatus(VoteStatusDto.from(userVoteRecord))
                 .build();
     }

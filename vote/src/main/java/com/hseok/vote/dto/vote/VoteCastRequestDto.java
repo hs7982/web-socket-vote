@@ -1,8 +1,5 @@
-package com.hseok.vote.dto;
+package com.hseok.vote.dto.vote;
 
-import com.hseok.vote.domain.VoteOption;
-import com.hseok.vote.domain.VoteRecord;
-import com.hseok.vote.domain.VoteRoom;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
