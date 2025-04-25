@@ -90,10 +90,10 @@ main {
     height: 50px;
     font-size: 20px;
     border: 2px solid #e2e8f0;
-    border-radius: 10px;
+    border-radius: 15px;
     transition: all 0.3s ease;
     position: relative;
-
+    overflow: hidden;
 }
 
 .inner > img {
@@ -181,6 +181,7 @@ main {
     top: 0;
     left: 0;
     background-color: #7e90fd;
+    border-radius: 10px;
     /* animation: fillChart 0.3s ease; */
 }
 

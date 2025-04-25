@@ -9,7 +9,8 @@ body {
 
 .intro-left {
     flex: 2;
-    background: url('../img/background.jpg') no-repeat center center/cover;
+    /*background: url('../img/background.jpeg') no-repeat center center/cover;*/
+    background-color: #139aba;
     display: flex;
     align-items: center;
     justify-content: center;

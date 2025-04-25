@@ -1,5 +1,6 @@
 package com.hseok.vote.service;
 
+import com.hseok.vote.config.WebSocketSessionService;
 import com.hseok.vote.domain.VoteOption;
 import com.hseok.vote.domain.VoteRecord;
 import com.hseok.vote.domain.VoteRoom;
@@ -26,6 +27,7 @@ public class VoteService {
     private final VoteOptionRepository voteOptionRepository;
     private final VoteRecordRepository voteRecordRepository;
     private final UserRepository userRepository;
+    private final WebSocketSessionService webSocketSessionService;
 
     public List<VoteRoom> list() {
         return voteRoomRepository.findAll();
@@ -37,6 +39,10 @@ public class VoteService {
         List<VoteRecord> allVoters = voteRecordRepository.findByVoteRoom(voteRoom).orElse(null);
 
         return VoteRoomResponseDto.from(voteRoom, userVoteRecord, allVoters);
+    }
+
+    public VoteRoom findById(long id) {
+        return voteRoomRepository.findById(id).orElseThrow(()->new EntityNotFoundException("id: "+id+"에 해당되는 투표를 찾을 수 없습니다!"));
     }
 
     @Transactional
@@ -93,6 +99,7 @@ public class VoteService {
         //3. 투표 옵션의 투표수를 증가시킴
         voteOption.increaseVote();
         voteOptionRepository.save(voteOption);
+        webSocketSessionService.broadcast(roomId, "newVote");
     }
 
     @Transactional
@@ -119,6 +126,7 @@ public class VoteService {
         //3. 새로운 투표 옵션의 투표수를 증가시킴
         newVoteOption.increaseVote();
         voteOptionRepository.save(newVoteOption);
+        webSocketSessionService.broadcast(roomId, "updateVote");
     }
 
     public void deleteVoteRoom(Long roomId, long userId) {
