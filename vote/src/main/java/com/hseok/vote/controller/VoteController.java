@@ -20,6 +20,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class VoteController {
     private final VoteService voteService;
+
     //get: 투표방 목록
     @GetMapping
     public ResponseEntity<Object> list() {
@@ -30,6 +31,7 @@ public class VoteController {
                 voteRoomList
         );
     }
+
     //get: id의 투표방 상세정보(재목내용 포함 옵션목록, 투표결과까지 포함)
     @GetMapping("/{roomId}")
     public ResponseEntity<Object> getVoteRoomDetail(@PathVariable Long roomId, @AuthenticationPrincipal UserPrincipal principal) {
@@ -40,11 +42,12 @@ public class VoteController {
                 responseDto
         );
     }
+
     //post: id의 투표방에 투표함
     @PostMapping("/{roomId}/cast")
     public ResponseEntity<Object> castVote(@PathVariable Long roomId,
-                                                 @RequestBody VoteCastRequestDto requestDto,
-                                                 @AuthenticationPrincipal UserPrincipal principal) {
+                                           @RequestBody VoteCastRequestDto requestDto,
+                                           @AuthenticationPrincipal UserPrincipal principal) {
         voteService.castVote(roomId, requestDto, principal.getUserId());
         return ResponseHandler.responseBuilder(
                 HttpStatus.CREATED,
@@ -55,8 +58,8 @@ public class VoteController {
 
     @PutMapping("/{roomId}/cast")
     public ResponseEntity<Object> updateVote(@PathVariable Long roomId,
-                                           @RequestBody VoteCastRequestDto requestDto,
-                                           @AuthenticationPrincipal UserPrincipal principal) {
+                                             @RequestBody VoteCastRequestDto requestDto,
+                                             @AuthenticationPrincipal UserPrincipal principal) {
         voteService.updateVote(roomId, requestDto, principal.getUserId());
         return ResponseHandler.responseBuilder(
                 HttpStatus.CREATED,

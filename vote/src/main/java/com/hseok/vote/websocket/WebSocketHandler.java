@@ -26,7 +26,7 @@ public class WebSocketHandler extends TextWebSocketHandler {
         String[] paths = session.getUri().getPath().split("/");
         Long roomId = Long.parseLong(paths[paths.length - 1]);
 
-        log.info("[WebSocketHandler] room: "+roomId+" message: "+payload);
+        log.info("[WebSocketHandler] room: " + roomId + " message: " + payload);
 
         switch (payload) {
             case "hello":
@@ -40,7 +40,7 @@ public class WebSocketHandler extends TextWebSocketHandler {
     }
 
     @Override
-    public void afterConnectionClosed(WebSocketSession session, CloseStatus status)throws Exception {
+    public void afterConnectionClosed(WebSocketSession session, CloseStatus status) throws Exception {
         Map<String, Object> attr = session.getAttributes();
         String userName = (String) attr.get("userName");
         Long roomId = (Long) attr.get("roomId");

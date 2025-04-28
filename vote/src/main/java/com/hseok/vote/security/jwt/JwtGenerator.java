@@ -34,6 +34,7 @@ public class JwtGenerator {
         this.accessTokenExpTime = accessTokenExpTime;
         this.RefreshTokenExpTime = RefreshTokenExpTime;
     }
+
     //AccessToken 생성
     public String generateAccessToken(User user) {
         long now = System.currentTimeMillis();

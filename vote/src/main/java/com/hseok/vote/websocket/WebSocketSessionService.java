@@ -36,7 +36,7 @@ public class WebSocketSessionService {
     public void broadcast(Long roomId, String message) {
         Set<org.springframework.web.socket.WebSocketSession> sessions = roomSessions.get(roomId);
         if (sessions != null) {
-            log.info("브로드케스트! roomId: "+roomId+", message: "+message);
+            log.info("브로드케스트! roomId: " + roomId + ", message: " + message);
             sessions.forEach(session -> {
                 try {
                     session.sendMessage(new TextMessage(message));

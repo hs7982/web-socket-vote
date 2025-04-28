@@ -28,7 +28,9 @@ public class MainController {
     }
 
     @GetMapping("/createRoom")
-    public String createRoom() {return "createRoom";}
+    public String createRoom() {
+        return "createRoom";
+    }
 
     @GetMapping("/api")
     public ResponseEntity<String> api() {

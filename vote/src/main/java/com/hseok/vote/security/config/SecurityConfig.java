@@ -52,9 +52,9 @@ public class SecurityConfig {
                 )
                 .logout(logout -> logout
                         .logoutUrl("/api/logout")
-                                .addLogoutHandler((request, response, authentication) -> {
-                                    jwtService.logout(request);
-                                })
+                        .addLogoutHandler((request, response, authentication) -> {
+                            jwtService.logout(request);
+                        })
                         .logoutSuccessUrl("/login")
                         .logoutSuccessHandler((request, response, authentication) -> {
                             response.sendRedirect("/login?logout=self");

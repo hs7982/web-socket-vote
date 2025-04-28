@@ -30,10 +30,13 @@ public class VoteOption {
     private int OptionOrder;
 
     @Column
-    private int voteCount=0;
+    private int voteCount = 0;
 
     public void increaseVote() {
         this.voteCount++;
     }
-    public void decreaseVote() { this.voteCount--;}
+
+    public void decreaseVote() {
+        this.voteCount--;
+    }
 }

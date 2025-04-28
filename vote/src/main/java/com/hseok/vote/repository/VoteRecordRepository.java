@@ -14,6 +14,7 @@ public interface VoteRecordRepository extends JpaRepository<VoteRecord, Long> {
 
     // userId와 voteRoomId로 투표 기록 조회
     Optional<VoteRecord> findByUserAndVoteRoom(User user, VoteRoom voteRoom);
+
     Optional<VoteRecord> findByUserIdAndVoteRoom(long userId, VoteRoom voteRoom);
 
     boolean existsByUserAndVoteRoom(User user, VoteRoom voteRoom);

@@ -37,7 +37,7 @@ public class JwtService {
 
     public String createAccessToken(HttpServletResponse response, User user) {
         String accessToken = jwtGenerator.generateAccessToken(user);
-        ResponseCookie cookie =jwtGenerator.createTokenCookie(ACCESS_PREFIX.getValue(), accessToken);
+        ResponseCookie cookie = jwtGenerator.createTokenCookie(ACCESS_PREFIX.getValue(), accessToken);
         response.addHeader(JWT_ISSUE_HEADER.getValue(), cookie.toString());
 
         log.info("Access Token 발급 성공");
@@ -80,7 +80,6 @@ public class JwtService {
         return storedToken.getToken().equals(token);
 
     }
-
 
 
     private TokenStatus getTokenStatus(String token, JwtRule jwtRule) {
@@ -155,8 +154,6 @@ public class JwtService {
 
         logout(user);
     }
-
-
 
 
 }

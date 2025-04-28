@@ -22,11 +22,11 @@ public class UserService {
     private final RoleRepository roleRepository;
 
     public User getUserById(Long id) {
-        return userRepository.findById(id).orElseThrow(()->new UsernameNotFoundException("User not found"));
+        return userRepository.findById(id).orElseThrow(() -> new UsernameNotFoundException("User not found"));
     }
 
     public User getUserByUsername(String username) {
-        return userRepository.findByUsername(username).orElseThrow(()->new UsernameNotFoundException("User not found"));
+        return userRepository.findByUsername(username).orElseThrow(() -> new UsernameNotFoundException("User not found"));
     }
 
     public UserJoinResponse userJoin(UserJoinRequest reqDto) {
