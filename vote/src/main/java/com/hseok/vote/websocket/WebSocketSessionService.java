@@ -1,4 +1,4 @@
-package com.hseok.vote.config;
+package com.hseok.vote.websocket;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;

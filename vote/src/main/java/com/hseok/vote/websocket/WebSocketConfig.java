@@ -1,4 +1,4 @@
-package com.hseok.vote.config;
+package com.hseok.vote.websocket;
 
 import com.hseok.vote.service.VoteService;
 import com.hseok.vote.user.UserPrincipal;

@@ -6,7 +6,6 @@ import com.hseok.vote.user.UserService;
 import com.hseok.vote.user.domain.RefreshToken;
 import com.hseok.vote.user.domain.User;
 import com.hseok.vote.user.repository.RefreshTokenRepository;
-import com.hseok.vote.user.repository.UserRepository;
 import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.JwtException;
 import io.jsonwebtoken.Jwts;
@@ -23,7 +22,6 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
 
 import javax.crypto.SecretKey;
-
 import java.util.Arrays;
 
 import static com.hseok.vote.security.jwt.JwtRule.*;

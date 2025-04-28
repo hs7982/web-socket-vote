@@ -1,6 +1,5 @@
 package com.hseok.vote.service;
 
-import com.hseok.vote.config.WebSocketSessionService;
 import com.hseok.vote.domain.VoteOption;
 import com.hseok.vote.domain.VoteRecord;
 import com.hseok.vote.domain.VoteRoom;
@@ -12,6 +11,7 @@ import com.hseok.vote.repository.VoteRecordRepository;
 import com.hseok.vote.repository.VoteRoomRepository;
 import com.hseok.vote.user.domain.User;
 import com.hseok.vote.user.repository.UserRepository;
+import com.hseok.vote.websocket.WebSocketSessionService;
 import jakarta.persistence.EntityNotFoundException;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
@@ -34,7 +34,7 @@ public class VoteService {
     }
 
     public VoteRoomResponseDto findById(long id, long userId) {
-        VoteRoom voteRoom = voteRoomRepository.findById(id).orElseThrow(()->new EntityNotFoundException("id: "+id+"에 해당되는 투표를 찾을 수 없습니다!"));
+        VoteRoom voteRoom = voteRoomRepository.findById(id).orElseThrow(() -> new EntityNotFoundException("id: " + id + "에 해당되는 투표를 찾을 수 없습니다!"));
         VoteRecord userVoteRecord = voteRecordRepository.findByUserIdAndVoteRoom(userId, voteRoom).orElse(null);
         List<VoteRecord> allVoters = voteRecordRepository.findByVoteRoom(voteRoom).orElse(null);
 
@@ -42,7 +42,7 @@ public class VoteService {
     }
 
     public VoteRoom findById(long id) {
-        return voteRoomRepository.findById(id).orElseThrow(()->new EntityNotFoundException("id: "+id+"에 해당되는 투표를 찾을 수 없습니다!"));
+        return voteRoomRepository.findById(id).orElseThrow(() -> new EntityNotFoundException("id: " + id + "에 해당되는 투표를 찾을 수 없습니다!"));
     }
 
     @Transactional
@@ -73,9 +73,9 @@ public class VoteService {
     @Transactional
     public void castVote(Long roomId, VoteCastRequestDto requestDto, long userId) {
         //id를 기반으로 투표방 정보를 가져옴
-        VoteRoom voteRoom = voteRoomRepository.findById(roomId).orElseThrow(()->new EntityNotFoundException("투표방을 찾을 수 없습니다."));
+        VoteRoom voteRoom = voteRoomRepository.findById(roomId).orElseThrow(() -> new EntityNotFoundException("투표방을 찾을 수 없습니다."));
         //id를 기반으로 옵션 정보를 가져옴
-        VoteOption voteOption = voteOptionRepository.findById(requestDto.getOptionId()).orElseThrow(()->new EntityNotFoundException("투표 옵션 ID를 찾을 수 없습니다."));
+        VoteOption voteOption = voteOptionRepository.findById(requestDto.getOptionId()).orElseThrow(() -> new EntityNotFoundException("투표 옵션 ID를 찾을 수 없습니다."));
 
         User user = userRepository.findById(userId)
                 .orElseThrow(() -> new EntityNotFoundException("사용자를 찾을 수 없습니다."));
@@ -105,11 +105,11 @@ public class VoteService {
     @Transactional
     public void updateVote(Long roomId, VoteCastRequestDto requestDto, long userId) {
         //id를 기반으로 투표방 정보를 가져옴
-        VoteRoom voteRoom = voteRoomRepository.findById(roomId).orElseThrow(()->new EntityNotFoundException("투표방을 찾을 수 없습니다."));
+        VoteRoom voteRoom = voteRoomRepository.findById(roomId).orElseThrow(() -> new EntityNotFoundException("투표방을 찾을 수 없습니다."));
         //id를 기반으로 옵션 바꿀 정보를 가져옴
-        VoteOption newVoteOption = voteOptionRepository.findById(requestDto.getOptionId()).orElseThrow(()->new EntityNotFoundException("투표 옵션 ID를 찾을 수 없습니다."));
+        VoteOption newVoteOption = voteOptionRepository.findById(requestDto.getOptionId()).orElseThrow(() -> new EntityNotFoundException("투표 옵션 ID를 찾을 수 없습니다."));
         //투표방에 투표를 했는지 검증, 수정할 옵션이 같은지 검증
-        VoteRecord prevVoteRecord = voteRecordRepository.findByUserIdAndVoteRoom(userId, voteRoom).orElseThrow(()->new IllegalArgumentException("아직 해당 투표에 참여하지 않았습니다!"));
+        VoteRecord prevVoteRecord = voteRecordRepository.findByUserIdAndVoteRoom(userId, voteRoom).orElseThrow(() -> new IllegalArgumentException("아직 해당 투표에 참여하지 않았습니다!"));
 
         VoteOption prevVoteOption = prevVoteRecord.getVoteOption();
         if (prevVoteOption.equals(newVoteOption))

@@ -1,7 +1,6 @@
 package com.hseok.vote.dto.vote;
 
 import com.hseok.vote.domain.VoteRecord;
-import com.hseok.vote.user.domain.User;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;

@@ -2,8 +2,6 @@ package com.hseok.vote.security.filter;
 
 import com.hseok.vote.security.jwt.JwtRule;
 import com.hseok.vote.security.jwt.JwtService;
-import com.hseok.vote.user.UserPrincipal;
-import com.hseok.vote.user.UserService;
 import com.hseok.vote.user.domain.User;
 import io.jsonwebtoken.JwtException;
 import jakarta.servlet.FilterChain;

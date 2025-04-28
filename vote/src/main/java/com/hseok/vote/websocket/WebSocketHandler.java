@@ -1,4 +1,4 @@
-package com.hseok.vote.config;
+package com.hseok.vote.websocket;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
@@ -42,9 +42,9 @@ public class WebSocketHandler extends TextWebSocketHandler {
     @Override
     public void afterConnectionClosed(WebSocketSession session, CloseStatus status)throws Exception {
         Map<String, Object> attr = session.getAttributes();
-        String nickname = (String) attr.get("nickname");
+        String userName = (String) attr.get("userName");
         Long roomId = (Long) attr.get("roomId");
-        log.info("[WebSocketHandler] user socket close: "+nickname);
+        log.info("[WebSocketHandler] user socket close: " + userName);
 
         sessionService.removeSession(roomId, session);
     }
