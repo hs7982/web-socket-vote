@@ -75,19 +75,22 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
                         User user = jwtService.getUserFromRefreshToken(refreshToken);
                         if (jwtService.validateRefreshTokenWithUser(refreshToken, user)) {
                             log.debug("[JWT Filter] 리프레쉬 토큰 검증 성공!");
+
+                            // 리프레쉬 검증 성공 -> 액세스 재발급 및 인증처리
                             String newAccessToken = jwtService.createAccessToken(response, user);
                             jwtService.createRefreshToken(response, user);
                             setAuthentication(newAccessToken);
                             filterChain.doFilter(request, response);
                             return;
                         } else {
+                            //검증 실패 -> 로그아웃처리
                             log.debug("[JWT Filter] 리프레쉬 토큰이 일치하지 않음");
                             jwtService.logout(user);
 
                         }
                     } else {
                         log.debug("[JWT Filter] 리프레쉬 토큰이 유효하지 않거나 만료됨");
-
+                        jwtService.logout(refreshToken);
                     }
                 } catch (Exception e) {
                     log.debug("[JWT Filter] 리프레쉬 토큰 처리 중 오류 발생", e);

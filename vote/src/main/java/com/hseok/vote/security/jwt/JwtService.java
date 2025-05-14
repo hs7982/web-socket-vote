@@ -143,7 +143,13 @@ public class JwtService {
     @Transactional
     public void logout(User user) {
         refreshTokenRepository.deleteByUser(user);
-        log.info("[JWT Service] RefreshToken 무효화 처리됨: " + user.getUsername());
+        log.info("[JWT Service] 유저의 RefreshToken 무효화 처리됨: " + user.getUsername());
+    }
+
+    @Transactional
+    public void logout(String refreshToken) {
+        refreshTokenRepository.deleteByToken(refreshToken);
+        log.info("[JWT Service] 해당되는 RefreshToken 무효화 처리!");
     }
 
     @Transactional
